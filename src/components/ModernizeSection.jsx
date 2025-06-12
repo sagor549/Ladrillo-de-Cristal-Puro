@@ -12,6 +12,7 @@ const ModernizeSection = () => {
   const cursorRef = useRef();
   const navLinksRef = useRef([]);
   const cursorMediasRef = useRef([]);
+  const underlineRefs = useRef([]);
   
   // State for active hover image
   const [activeImage, setActiveImage] = useState(null);
@@ -69,15 +70,15 @@ const ModernizeSection = () => {
           opacity: 0
         });
 
-        // Cursor follow setup
+        // Faster cursor follow
         setCursorX = gsap.quickTo(cursorRef.current, "x", {
-          duration: 0.6,
-          ease: "expo"
+          duration: 0.4, // Increased speed
+          ease: "power2.out"
         });
 
         setCursorY = gsap.quickTo(cursorRef.current, "y", {
-          duration: 0.6,
-          ease: "expo"
+          duration: 0.4, // Increased speed
+          ease: "power2.out"
         });
 
         // Split text animation for main title
@@ -92,7 +93,7 @@ const ModernizeSection = () => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 90%",
+            start: "top 85%", // Trigger earlier
             end: "bottom 20%",
             toggleActions: "play none none reverse"
           }
@@ -100,7 +101,7 @@ const ModernizeSection = () => {
         
         tl.fromTo(subtitleRef.current,
           { y: -30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: "power2.out" }
+          { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" } // Faster animation
         )
         .fromTo(chars, 
           { y: 100, opacity: 0, rotationX: -90 },
@@ -108,27 +109,37 @@ const ModernizeSection = () => {
             y: 0, 
             opacity: 1, 
             rotationX: 0,
-            duration: 1.2,
-            stagger: 0.02,
+            duration: 1.0, // Faster animation
+            stagger: 0.015, // Increased stagger speed
             ease: "power3.out"
           },
-          "-=0.3"
+          "-=0.2"
         )
         .fromTo(descriptionRef.current,
           { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
-          "-=0.6"
+          { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, // Faster
+          "-=0.4"
         )
         .fromTo(navLinksRef.current,
           { y: 30, opacity: 0 },
           { 
             y: 0, 
             opacity: 1, 
-            duration: 0.8,
-            stagger: 0.1,
+            duration: 0.7,
+            stagger: 0.08, // Faster stagger
             ease: "power3.out" 
           },
-          "-=0.4"
+          "-=0.3"
+        )
+        .fromTo(underlineRefs.current,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            duration: 1.2,
+            stagger: 0.1,
+            ease: "power2.out"
+          },
+          "-=0.5"
         );
 
         // Cursor hover timeline
@@ -136,7 +147,7 @@ const ModernizeSection = () => {
         cursorTl.to(cursorRef.current, {
           scale: 1,
           opacity: 1,
-          duration: 0.5,
+          duration: 0.3, // Faster animation
           ease: "expo.inOut"
         });
 
@@ -263,23 +274,30 @@ const ModernizeSection = () => {
             </p>
           </div>
 
-          {/* Navigation Links */}
-          <nav className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 w-full max-w-4xl">
-            {navItems.map((item, index) => (
-              <a
-                key={index}
-                href="#"
-                ref={el => navLinksRef.current[index] = el}
-                className="nav-link group opacity-0 text-center py-6 px-4 border border-gray-700 rounded-lg hover:border-yellow-400 transition-all duration-300 hover:bg-gray-800/30"
-              >
-                <div className="flex flex-col items-center space-y-3">
-                  <i className={`${item.icon} text-2xl text-gray-400 group-hover:text-yellow-400 transition-colors duration-300`}></i>
-                  <span className="text-gray-300 group-hover:text-white transition-colors duration-300 font-medium">
-                    {item.text}
-                  </span>
+          {/* Navigation Links - Column Style */}
+          <nav className="w-full max-w-2xl">
+            <div className="flex flex-col space-y-1">
+              {navItems.map((item, index) => (
+                <div key={index} className="relative py-4">
+                  <a
+                    href="#"
+                    ref={el => navLinksRef.current[index] = el}
+                    className="nav-link group flex items-center justify-center opacity-0 text-center py-2 px-4 transition-all duration-300"
+                  >
+                    <div className="flex items-center space-x-4">
+                      <i className={`${item.icon} text-xl text-gray-400 group-hover:text-yellow-400 transition-colors duration-300`}></i>
+                      <span className="text-gray-300 group-hover:text-white transition-colors duration-300 font-medium text-lg">
+                        {item.text}
+                      </span>
+                    </div>
+                  </a>
+                  <div 
+                    ref={el => underlineRefs.current[index] = el}
+                    className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent origin-left scale-x-0"
+                  ></div>
                 </div>
-              </a>
-            ))}
+              ))}
+            </div>
           </nav>
         </div>
       </div>
