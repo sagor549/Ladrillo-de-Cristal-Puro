@@ -71,7 +71,7 @@ const AppContent = () => {
           <div 
             className="fixed inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: 'url(/assets/bg.jpg)',
+              backgroundImage: 'url(/bg.png)',
             }}
           />
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" />

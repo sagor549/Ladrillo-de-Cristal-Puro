@@ -213,7 +213,7 @@ const ProductShowcase = () => {
         >
           <div 
             className="panel-bg absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1603665270146-9060ca1e07f3?auto=format&fit=crop&w=1200')" }}
+            style={{ backgroundImage: "url('bt1.png')" }}
           ></div>
           
           {/* Overlay gradient */}

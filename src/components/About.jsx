@@ -121,7 +121,7 @@ const About = () => {
       className="py-32 relative overflow-hidden bg-black/95 backdrop-blur-sm"
     >
       {/* Subtle texture */}
-      <div className="absolute inset-0 opacity-[3%] bg-[url('/texture.png')] bg-cover"></div>
+      <div className="absolute inset-0 opacity-[8%] bg-[url('/bg.jpg')] bg-cover"></div>
       
       {/* Glowing accents */}
       <div className="absolute top-1/4 left-[10%] w-64 h-64 bg-blue-900/20 rounded-full blur-[100px]"></div>
@@ -160,7 +160,7 @@ const About = () => {
             className="w-full max-w-2xl mb-20"
           >
             <img 
-              src="/bottle.png" 
+              src="/fin.png" 
               alt="Ladrillo de Cristal Puro" 
               className="w-full h-auto object-contain max-h-[70vh]"
               onError={(e) => {
