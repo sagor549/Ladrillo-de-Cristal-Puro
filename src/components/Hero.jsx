@@ -62,23 +62,21 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative h-screen w-full overflow-hidden cursor-pointer"
-      onClick={toggleBottle}
+      className="relative h-screen w-full overflow-hidden cursor-pointer "
+      onClick={toggleBottle}  
     >
       {/* Background images */}
       <div className="absolute inset-0">
         {/* Background for both mobile and desktop */}
         <div 
-          className="absolute inset-0 bg-cover bg-center z-0"
+          className="absolute inset-0 bg-cover bg-center z-0 "
           style={{ backgroundImage: "url('/opp.png')" }} 
         />
       </div>
       
-      {/* Noise overlay */}
+     
       
       
-      {/* Dark overlay */}
-      {/* <div className="absolute inset-0 bg-black/30 z-0" /> */}
       
       {/* Content */}
       <div 

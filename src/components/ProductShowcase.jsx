@@ -86,7 +86,7 @@ const ProductShowcase = () => {
   return (
     <section 
       ref={sectionRef} 
-      className="relative py-10 overflow-hidden bg-black/5"
+      className="relative py-10 overflow-hidden backdrop-blur-sm border-b border-white/5  "
     >
       
       
