@@ -263,7 +263,7 @@ return particles;
 return (
 <section 
 ref={sectionRef}
-className="min-h-screen bg-black/90 backdrop-blur-sm border-b border-white/5 relative overflow-hidden py-12 md:py-20 px-4 sm:px-6"
+className="min-h-screen bg-black/90 backdrop-blur-sm border-b border-white/5 relative overflow-hidden  md:py-14 px-4 sm:px-6"
 >
 {/* Floating Particles Background */}
 <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -343,7 +343,7 @@ className="min-h-screen bg-black/90 backdrop-blur-sm border-b border-white/5 rel
         ref={mainTitleRef}
         className="text-xl sm:text-xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold mb-8 md:mb-12 leading-tight text-white text-center w-full"
         style={{ 
-          lineHeight: '1.1',
+          lineHeight: '1.8',
           letterSpacing: '-0.02em'
         }}
       >

@@ -194,13 +194,13 @@ const Hero = () => {
             <img 
               src="/bottle.png" 
               alt="Ladrillo de Cristal Puro Tequila Bottle"
-              className="max-h-[60vh] relative bottom-28"
+              className="max-h-[60vh] relative bottom-32"
             />
           </div>
         </div>
         
         {/* Bottom text - position adjusted for mobile */}
-        <div className="relative bottom-36 md:bottom-0 text-center md:text-left">
+        <div className="relative bottom-40 md:bottom-0 text-center md:text-left">
           <div className="relative inline-block  md:mt-0">
             
             <p className="text-white text-sm md:text-base px-4 relative z-10 inline-block  max-w-md font-light tracking-wider italic ">
