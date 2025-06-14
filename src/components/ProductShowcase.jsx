@@ -86,7 +86,7 @@ const ProductShowcase = () => {
   return (
     <section 
       ref={sectionRef} 
-      className="relative py-32 overflow-hidden bg-black/95"
+      className="relative py-10 overflow-hidden bg-black/95"
     >
       {/* Subtle background elements */}
       <div className="absolute inset-0">
@@ -213,7 +213,7 @@ const ProductShowcase = () => {
         >
           <div 
             className="panel-bg absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('bt1.png')" }}
+            style={{ backgroundImage: "url('don.png')" }}
           ></div>
           
           {/* Overlay gradient */}

@@ -9,7 +9,14 @@ const Navbar = () => {
   const location = useLocation();
   const navbarRef = useRef(null);
   const mobileMenuRef = useRef(null);
-  const timelineRef = useRef(null); // GSAP timeline reference
+  const timelineRef = useRef(null);
+
+  // Determine if we should show scrolled nav
+  const shouldShowScrolledNav = () => {
+    return isScrolled || 
+           location.pathname === '/contact' || 
+           location.pathname === '/blog';
+  };
 
   // Handle scroll effect
   useEffect(() => {
@@ -18,9 +25,16 @@ const Navbar = () => {
       setIsScrolled(scrolled);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // Only add scroll listener on home page
+    if (location.pathname === '/') {
+      window.addEventListener('scroll', handleScroll);
+    } else {
+      // Force scrolled state on non-home pages
+      setIsScrolled(true);
+    }
+
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   // Navbar entrance animation
   useEffect(() => {
@@ -39,7 +53,6 @@ const Navbar = () => {
   useEffect(() => {
     if (!mobileMenuRef.current) return;
 
-    // Clear any existing animations
     if (timelineRef.current) {
       timelineRef.current.kill();
     }
@@ -104,7 +117,6 @@ const Navbar = () => {
 
   const scrollToSection = (sectionId) => {
     if (location.pathname !== '/') {
-      // Navigate to home page first then scroll
       window.location.href = `/#${sectionId}`;
       return;
     }
@@ -120,24 +132,27 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Determine if scrolled nav should be shown
+  const showScrolledNav = shouldShowScrolledNav();
+
   return (
     <>
       <nav
         ref={navbarRef}
         className={`navbar fixed top-3 z-50 w-full transition-all duration-700 ease-out`}
       >
-        <div className={`flex justify-center transition-all duration-700 ease-out ${isScrolled ? 'px-4' : ''}`}>
-          <div className={`transition-all duration-900 ease-out ${isScrolled ? 'bg-black/80 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl w-[85%] lg:w-[75%] py-3' : 'bg-transparent border-transparent w-auto py-4'}`}>
-            <div className={`h-full flex items-center transition-all duration-700 ease-out ${isScrolled ? 'px-6 md:px-8 justify-between' : 'justify-center'}`}>
+        <div className={`flex justify-center transition-all duration-700 ease-out ${showScrolledNav ? 'px-4' : ''}`}>
+          <div className={`transition-all duration-900 ease-out ${showScrolledNav ? 'bg-black/80 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl w-[85%] lg:w-[75%] py-3' : 'bg-transparent border-transparent w-auto py-4'}`}>
+            <div className={`h-full flex items-center transition-all duration-700 ease-out ${showScrolledNav ? 'px-6 md:px-8 justify-between' : 'justify-center'}`}>
               {/* Logo */}
               <Link
                 to="/"
-                className={`flex-shrink-0 z-10 transition-all duration-500 ease-out ${isScrolled ? 'scale-90' : 'scale-100 hover:scale-105'}`}
+                className={`flex-shrink-0 z-10 transition-all duration-500 ease-out ${showScrolledNav ? 'scale-90' : 'scale-100 hover:scale-105'}`}
               >
                 <img
                   src="/logoo.png"
                   alt="Ladrillo de Cristal Puro"
-                  className={`transition-all duration-700 ease-out ${isScrolled ? 'h-12' : 'h-16'} w-auto`}
+                  className={`transition-all duration-700 ease-out ${showScrolledNav ? 'h-12' : 'h-16'} w-auto`}
                   onError={(e) => {
                     e.target.style.display = 'none';
                     const fallback = e.target.nextSibling;
@@ -148,8 +163,8 @@ const Navbar = () => {
                 <div className="hidden text-white font-bold text-xl">LCP</div>
               </Link>
 
-              {/* Desktop Navigation - Only visible when scrolled */}
-              {isScrolled && (
+              {/* Desktop Navigation - Only visible when scrolled or on special pages */}
+              {showScrolledNav && (
                 <div className="hidden lg:flex items-center space-x-8">
                   <Link 
                     to="/" 
@@ -188,8 +203,8 @@ const Navbar = () => {
                 </div>
               )}
               
-              {/* Mobile Menu Button - Only visible when scrolled */}
-              {isScrolled && (
+              {/* Mobile Menu Button - Only visible when scrolled or on special pages */}
+              {showScrolledNav && (
                 <button
                   onClick={toggleMobileMenu}
                   className="lg:hidden text-white/90 hover:text-white transition-all duration-300 p-2 hover:bg-white/10 rounded-lg"
@@ -207,22 +222,22 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div 
-        className="mobile-menu-overlay fixed inset-0 bg-black/60 z-40 lg:hidden pointer-events-none opacity-0"
+        className="mobile-menu-overlay fixed inset-0 bg-black/80 backdrop-blur-sm z-40 lg:hidden pointer-events-none opacity-0"
         onClick={() => setIsMobileMenuOpen(false)}
       />
 
       {/* Mobile Menu */}
       <div 
-        className="mobile-menu fixed top-0 right-0 h-full w-4/5 max-w-sm z-50 lg:hidden transform translate-x-full bg-white"
+        className="mobile-menu fixed top-0 right-0 h-full w-4/5 max-w-sm z-50 lg:hidden transform translate-x-full bg-gradient-to-b from-black  to-black"
         ref={mobileMenuRef}
       >
         <div className="p-6 pt-20 h-full flex flex-col">
           {/* Close Button */}
           <button
             onClick={toggleMobileMenu}
-            className="absolute top-6 right-6 text-gray-600 hover:text-black transition-all duration-300 p-2 hover:bg-gray-100 rounded-lg"
+            className="absolute top-6 right-6 text-white hover:text-gray-300 transition-all duration-300 p-2"
           >
-            <X size={24} />
+            <X size={30} />
           </button>
           
           {/* Menu Items */}
@@ -230,41 +245,41 @@ const Navbar = () => {
             <Link 
               to="/" 
               onClick={toggleMobileMenu}
-              className="mobile-menu-item block text-black hover:text-gray-600 font-playfair font-semibold text-xl transition-all duration-300 py-4 px-2 border-b border-gray-100 opacity-0"
+              className="mobile-menu-item block text-white hover:text-gray-600 font-playfair font-semibold text-2xl transition-all duration-300 py-6 px-4 border-b border-white/10 opacity-0"
             >
               Home
             </Link>
             <button 
               onClick={() => scrollToSection('about')}
-              className="mobile-menu-item block w-full text-left text-black hover:text-gray-600 font-playfair font-semibold text-xl transition-all duration-300 py-4 px-2 border-b border-gray-100 opacity-0"
+              className="mobile-menu-item block w-full text-left text-white hover:text-gray-600 font-playfair font-semibold text-2xl transition-all duration-300 py-6 px-4 border-b border-white/10 opacity-0"
             >
               About
             </button>
             <button 
               onClick={() => scrollToSection('product-showcase')}
-              className="mobile-menu-item block w-full text-left text-black hover:text-gray-600 font-playfair font-semibold text-xl transition-all duration-300 py-4 px-2 border-b border-gray-100 opacity-0"
+              className="mobile-menu-item block w-full text-left text-white hover:text-gray-600 font-playfair font-semibold text-2xl transition-all duration-300 py-6 px-4 border-b border-white/10 opacity-0"
             >
               Legacy
             </button>
             <Link 
               to="/blog" 
               onClick={toggleMobileMenu}
-              className="mobile-menu-item block text-black hover:text-gray-600 font-playfair font-semibold text-xl transition-all duration-300 py-4 px-2 border-b border-gray-100 opacity-0"
+              className="mobile-menu-item block text-white hover:text-gray-600 font-playfair font-semibold text-2xl transition-all duration-300 py-6 px-4 border-b border-white/10 opacity-0"
             >
               Blog
             </Link>
             <Link 
               to="/contact" 
               onClick={toggleMobileMenu}
-              className="mobile-menu-item block text-black hover:text-gray-600 font-playfair font-semibold text-xl transition-all duration-300 py-4 px-2 opacity-0"
+              className="mobile-menu-item block text-white hover:text-gray-500 font-playfair font-semibold text-2xl transition-all duration-300 py-6 px-4 opacity-0"
             >
               Contact
             </Link>
           </div>
 
           {/* Footer */}
-          <div className="pt-6 border-t border-gray-200">
-            <div className="text-gray-400 text-xs font-light">
+          <div className="pt-6 border-t border-white/10">
+            <div className="text-white/50 text-sm font-light text-center">
               © {new Date().getFullYear()} Ladrillo de Cristal Puro
             </div>
           </div>

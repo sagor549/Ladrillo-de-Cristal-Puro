@@ -32,7 +32,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer ref={footerRef} className="py-20 bg-black/100 backdrop-blur-sm border-t border-white/5 relative overflow-hidden">
+    <footer ref={footerRef} className="py-10 bg-black/100 backdrop-blur-sm border-t border-white/5 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5"></div>
