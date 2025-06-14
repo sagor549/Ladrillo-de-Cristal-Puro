@@ -263,7 +263,7 @@ return particles;
 return (
 <section 
 ref={sectionRef}
-className="min-h-screen bg-black/90 backdrop-blur-sm border-b border-white/5 relative overflow-hidden  md:py-14 px-4 sm:px-6"
+className="min-h-screen  backdrop-blur-sm border-b border-white/5 relative overflow-hidden  py-20 px-4 sm:px-6 "
 >
 {/* Floating Particles Background */}
 <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -313,7 +313,7 @@ className="min-h-screen bg-black/90 backdrop-blur-sm border-b border-white/5 rel
     </div>
     
     {/* Bottom border with glow effect */}
-    <div className="absolute bottom-0 left-0 right-0 flex justify-center">
+    <div className="absolute bottom-8 md:bottom-0 left-0 right-0 flex justify-center">
       <div className="flex items-center">
         <div className="w-16 sm:w-32 lg:w-48 h-px bg-gradient-to-r from-transparent via-white to-transparent decorative-line" 
              style={{ boxShadow: '0 0 8px rgba(255,255,255,0.5)' }}></div>
@@ -343,7 +343,7 @@ className="min-h-screen bg-black/90 backdrop-blur-sm border-b border-white/5 rel
         ref={mainTitleRef}
         className="text-xl sm:text-xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold mb-8 md:mb-12 leading-tight text-white text-center w-full"
         style={{ 
-          lineHeight: '1.8',
+          lineHeight: '1.1',
           letterSpacing: '-0.02em'
         }}
       >

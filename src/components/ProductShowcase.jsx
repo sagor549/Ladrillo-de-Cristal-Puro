@@ -86,14 +86,9 @@ const ProductShowcase = () => {
   return (
     <section 
       ref={sectionRef} 
-      className="relative py-10 overflow-hidden bg-black/95"
+      className="relative py-10 overflow-hidden bg-black/5"
     >
-      {/* Subtle background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-        <div className="absolute inset-0 opacity-[0.02] bg-[url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200')] bg-cover"></div>
-      </div>
+      
       
       {/* Floating particles */}
       <div className="absolute top-[15%] left-[10%] w-4 h-4 bg-white/5 rounded-full animate-pulse"></div>
